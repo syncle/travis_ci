@@ -56,11 +56,14 @@ matrix:
          - PYTHON=3.6
 
 before_install:
-  # ISSUE: we may want to use '/scripts/install-deps-ubuntu.sh'
-  # but this shell script does not have -y, and
-  # ubuntu 14.04 of travis-ci does not recognize sudo apt-get install libglfw3-dev
+  # ISSUE: we may want to use '/scripts/install-deps-ubuntu.sh' in the future.
+  # At this moment, travis-ci supports up to ubuntu 14.04 and this environment
+  # does not recognize sudo apt-get install libglfw3-dev
+  #
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      ./scripts/install-deps-ubuntu.sh;
+      sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+      git clone https://github.com/glfw/glfw && mkdir build && cd build && cmake ../glfw && make -j4 && sudo make install;
+      cd;
     fi
   # scripts/install-deps-osx.sh works well
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
