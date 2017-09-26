@@ -21,6 +21,8 @@ matrix:
             - g++-4.8
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
+            - python3.6-dev
+            - python3.6-venv
       env:
          - PYTHON=3.6 CC=gcc-4.8 CXX=g++-4.8
 
@@ -39,6 +41,8 @@ matrix:
             - g++-6
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
+            - python3.6-dev
+            - python3.6-venv
       env:
          - PYTHON=3.6 CC=gcc-6 && CXX=g++-6
 
