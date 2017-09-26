@@ -21,7 +21,6 @@ matrix:
             - g++-4.8
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
-            - python3.6-dev
       env:
          - PYTHON=3.6 CC=gcc-4.8 CXX=g++-4.8
 
@@ -40,7 +39,6 @@ matrix:
             - g++-6
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
-            - python3.6-dev
       env:
          - PYTHON=3.6 CC=gcc-6 && CXX=g++-6
 
@@ -67,6 +65,7 @@ before_install:
       sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
       git clone https://github.com/glfw/glfw && mkdir build_glfw && cd build_glfw && cmake ../glfw && make -j4 && sudo make install;
       cd ..;
+      sudo apt-get install python3.6-dev python3.6-venv
       python3.6 -m pip install --user --upgrade pip wheel;
       pyenv global system 3.6;
     fi
