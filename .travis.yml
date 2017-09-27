@@ -10,6 +10,7 @@ before_install:
   - docker pull ubuntu:16.04
 
 script:
+  - pwd
   - python -V
   - docker build .
   - lsb_release -a
