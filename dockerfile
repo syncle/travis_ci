@@ -5,7 +5,7 @@ ENV USER root
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get install build-essential libssl-dev libffi-dev python-dev
+RUN apt-get -y install build-essential libssl-dev libffi-dev python-dev
 RUN python -V
 RUN pwd
 RUN mkdir build
