@@ -6,7 +6,7 @@ ENV USER root
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN add-apt-repository ppa:jonathonf/python-3.6
-RUN apt-get -y install build-essential libssl-dev libffi-dev python3.6
+RUN apt-get -y install build-essential git python3.6
 RUN python -V
 
 RUN git clone https://github.com/syncle/travis_ci.git
