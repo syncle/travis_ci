@@ -9,7 +9,7 @@ services:
   - docker
 
 before_install:
-  - "docker pull ${distribution}:${version}"
+  - "docker pull ubuntu:16.04"
 
 script:
-  - "docker build --file=tests/${distribution}-${version}-py${python}.dockerfile ."
+  - "docker build ."
