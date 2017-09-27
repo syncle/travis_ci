@@ -16,6 +16,6 @@ RUN python3.6 -m pip install pip --upgrade
 RUN python3.6 -m pip install wheel
 
 RUN git clone https://github.com/syncle/travis_ci.git
-RUN cd syncle/travis_ci/
+RUN cd travis_ci/
 RUN pwd
 CMD ["script/install-deps-ubuntu.sh"]
