@@ -3,7 +3,9 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV USER root
 
-RUN apt-get update -y
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install build-essential libssl-dev libffi-dev python-dev
 RUN python -V
 RUN pwd
 RUN mkdir build
