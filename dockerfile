@@ -4,3 +4,5 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y
 RUN script/install-deps-ubuntu.sh
+RUN mkdir build
+RUN cd build
