@@ -14,5 +14,7 @@ script:
   - docker-machine ls
   - docker start
   - pwd
+  - ls
+  - docker ps -a
   - python -V
   - lsb_release -a
