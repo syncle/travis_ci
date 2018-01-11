@@ -19,6 +19,6 @@ for pkg in cmake libusb glew libpng jpeg pkg-config jsoncpp eigen librealsense; 
         echo "Package '$pkg' has already been installed."
     else
         echo "Package '$pkg' is being installed ..."
-        brew install $pkg
+        sudo brew install $pkg
     fi
 done
