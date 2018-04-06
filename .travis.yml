@@ -15,11 +15,11 @@ compiler:
 before_install:
   - echo $DOCKER_IMAGE
   - docker pull $DOCKER_IMAGE
-  - docker run -d -v $(pwd):/code $DOCKER_IMAGE /bin/bash -c 'while true; do sleep 1; done'
+  - docker run -d -v $(pwd):/travis_ci $DOCKER_IMAGE /bin/bash -c 'while true; do sleep 1; done'
   - docker exec $(docker ps -aq) /bin/bash -c 'id'
 
 before_script:
-  - docker exec $(docker ps -aq) ls && cd && ls
+  - docker exec $(docker ps -aq) ls && pwd
   - docker exec $(docker ps -aq) /bin/bash '/scripts/install-deps-ubuntu.sh'
 
 #script:
