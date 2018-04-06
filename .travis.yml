@@ -22,5 +22,6 @@ before_install:
 before_script:
   - docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh'
 
-#script:
+script:
+  - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
 #  - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
