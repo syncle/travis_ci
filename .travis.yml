@@ -19,7 +19,7 @@ before_install:
   - docker exec $(docker ps -aq) /bin/bash -c 'id'
 
 before_script:
-  - docker exec $(docker ps -aq) ls && pwd
+  - docker exec $(docker ps -aq) 'ls && pwd'
   - docker exec $(docker ps -aq) /bin/bash '/scripts/install-deps-ubuntu.sh'
 
 #script:
