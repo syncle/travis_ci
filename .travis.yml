@@ -22,21 +22,21 @@ before_install:
     - docker pull ${distribution}:${version}
 
     # running docker on the background
-    - docker run -d -v $(pwd):/travis_ci $DOCKER_IMAGE /bin/bash -c 'while true; do sleep 1; done'
+    - docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done'
 
     # run scripts on the background docker
     - docker exec $(docker ps -aq) /bin/bash -c 'id'
 
     # sudo is not installed by default
     - docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo'
-    #
-    # # installing dependencies.
-    # -   if [ "${distribution}:${version}" == "ubuntu:16.04" ]; then
-    #         docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
-    #     fi
-    # -   if [ "${distribution}:${version}" == "ubuntu:14.04" ]; then
-    #         docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
-    #     fi
+
+    # installing dependencies.
+    -   if [ "${distribution}:${version}" == "ubuntu:16.04" ]; then
+            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
+        fi
+    -   if [ "${distribution}:${version}" == "ubuntu:14.04" ]; then
+            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
+        fi
 
 script:
     - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
