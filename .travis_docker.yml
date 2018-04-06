@@ -18,3 +18,4 @@ script:
   - docker ps -a
   - python -V
   - lsb_release -a
+  - scripts/install-deps-ubuntu.sh
