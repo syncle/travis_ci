@@ -15,7 +15,7 @@ compiler:
 before_install:
   - echo $DOCKER_IMAGE
   - docker pull $DOCKER_IMAGE
-  - docker run -d -v ubuntu:16.04
+  - docker run -d -v --name ubuntu:16.04
 
 before_script:
   - docker exec $(docker ps -aq) /bin/bash 'scripts/install-deps-ubuntu.sh'
