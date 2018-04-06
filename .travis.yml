@@ -1,21 +1,24 @@
 sudo: required
 
 env:
-  - python: 3.5
+  matrix:
+    - DOCKER_IMAGE=ubuntu:16.04
 
 services:
   - docker
 
-before_install:
-  - docker pull ubuntu:16.04
+language: c++
 
-script:
-  - docker build .
-  - docker-machine ls
-  - docker start
-  - pwd
-  - ls
-  - docker ps -a
-  - python -V
-  - lsb_release -a
-  - scripts/install-deps-ubuntu.sh
+compiler:
+  - gcc
+
+before_install:
+  - echo $DOCKER_IMAGE
+  - docker pull $DOCKER_IMAGE
+  - docker run -d -v $DOCKER_IMAGE
+
+before_script:
+  - docker exec $(docker ps -aq) /bin/bash 'scripts/install-deps-ubuntu.sh'
+
+#script:
+#  - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
