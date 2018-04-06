@@ -29,14 +29,14 @@ before_install:
 
     # sudo is not installed by default
     - docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo'
-
-    # installing dependencies.
-    -   if [ "${distribution}:${version}" == "ubuntu:16.04" ]; then
-            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
-        fi
-    -   if [ "${distribution}:${version}" == "ubuntu:14.04" ]; then
-            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
-        fi
+    #
+    # # installing dependencies.
+    # -   if [ "${distribution}:${version}" == "ubuntu:16.04" ]; then
+    #         docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
+    #     fi
+    # -   if [ "${distribution}:${version}" == "ubuntu:14.04" ]; then
+    #         docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
+    #     fi
 
 script:
     - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
