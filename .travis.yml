@@ -1,39 +1,43 @@
-matrix:
+notifications:
+    email: false # turn off email notifications for build failure
 
-    notifications:
-        email: false # turn off email notifications for build failure
+sudo: required
 
-    sudo: required
+env:
+    - distribution: ubuntu
+        version: 16.04
+    - distribution: ubuntu
+        version: 14.04
 
-    env:
-        matrix:
-            - DOCKER_IMAGE=ubuntu:16.04
-            - DOCKER_IMAGE=ubuntu:14.04
+services:
+    - docker
 
-    services:
-        - docker
+language: c++
 
-    language: c++
+compiler:
+    - gcc
 
-    compiler:
-        - gcc
+before_install:
+    - echo ${distribution}:${version}
+    - docker pull ${distribution}:${version}
 
-    before_install:
-        - echo $DOCKER_IMAGE
-        - docker pull $DOCKER_IMAGE
-        # running docker on the background
-        - docker run -d -v $(pwd):/travis_ci $DOCKER_IMAGE /bin/bash -c 'while true; do sleep 1; done'
-        # run scripts on the background docker
-        - docker exec $(docker ps -aq) /bin/bash -c 'id'
-        # sudo is not installed by default
-        - docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo'
+    # running docker on the background
+    - docker run -d -v $(pwd):/travis_ci $DOCKER_IMAGE /bin/bash -c 'while true; do sleep 1; done'
 
-    before_script:
-        # installing dependencies.
-        -   if [ "$DOCKER_IMAGE" == "ubuntu:16.04" ]; then
-                docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
-            fi
+    # run scripts on the background docker
+    - docker exec $(docker ps -aq) /bin/bash -c 'id'
 
-    script:
-        - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
-    #  - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
+    # sudo is not installed by default
+    - docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo'
+
+    # installing dependencies.
+    -   if [ "${distribution}:${version}" == "ubuntu:16.04" ]; then
+            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
+        fi
+    -   if [ "${distribution}:${version}" == "ubuntu:14.04" ]; then
+            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
+        fi
+
+script:
+    - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
+#  - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
