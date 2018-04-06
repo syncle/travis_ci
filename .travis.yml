@@ -19,11 +19,11 @@ compiler:
 
 before_install:
     -   if [ "${distribution}" == "ubuntu" ]; then
-            pwd
+            docker pull ${distribution}:${version}
         fi
-        
-    - echo ${distribution}:${version}
-    - docker pull ${distribution}:${version}
+
+    # - echo ${distribution}:${version}
+    # - docker pull ${distribution}:${version}
 
     # running docker on the background
     - docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done'
