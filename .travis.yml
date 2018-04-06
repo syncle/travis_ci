@@ -18,6 +18,10 @@ compiler:
     - gcc
 
 before_install:
+    -   if [ "${distribution}" == "ubuntu" ]; then
+            pwd
+        fi
+        
     - echo ${distribution}:${version}
     - docker pull ${distribution}:${version}
 
