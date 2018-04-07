@@ -5,7 +5,9 @@ matrix:
 
   language:
     - python
-    - cpp
+
+  python:
+    - "3.6"
 
   include:
     # Default environment of Ubuntu 14.04
