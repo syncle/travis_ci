@@ -19,7 +19,7 @@ compiler:
 
 before_install:
     -   if [ "${distribution}" == "ubuntu" ]; then
-            docker pull ${distribution}:${version}
+            docker pull ${distribution}:${version};
         fi
 
     # - echo ${distribution}:${version}
