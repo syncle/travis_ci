@@ -1,34 +1,36 @@
-notifications:
-    email: false # turn off email notifications for build failure
+matrix:
 
-sudo: required
+    notifications:
+        email: false # turn off email notifications for build failure
 
-language:
-  - python
-  - cpp
+    sudo: required
 
-include:
+    language:
+      - python
+      - cpp
 
-    - os: linux
-      distribution: ubuntu
-      version: 16.04
+    include:
 
-    - os: linux
-      distribution: ubuntu
-      version: 14.04
+        - os: linux
+          distribution: ubuntu
+          version: 16.04
 
-    # Default environment of MacOS El Capitan
-    # compiled using clang shipped with xcode8
-    - os: osx
-      osx_image: xcode8
+        - os: linux
+          distribution: ubuntu
+          version: 14.04
 
-    # Default environment of MacOS Sierra
-    # compiled using clang shipped with xcode8.3
-    - os: osx
-      osx_image: xcode8.3
+        # Default environment of MacOS El Capitan
+        # compiled using clang shipped with xcode8
+        - os: osx
+          osx_image: xcode8
 
-services:
-    - docker
+        # Default environment of MacOS Sierra
+        # compiled using clang shipped with xcode8.3
+        - os: osx
+          osx_image: xcode8.3
+
+    services:
+        - docker
 
 before_install:
 
