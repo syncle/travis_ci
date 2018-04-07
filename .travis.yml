@@ -44,29 +44,29 @@ matrix:
     services:
         - docker
 
-# before_install:
-#
-#     # Ubuntu systems uses docker as travis-ci supports ubuntu 14.04 by default.
-#     # Step 1) pull and run docker on the background
-#     # Step 2) installing dependencies. install sudo as it is not installed in docker.
-#     # Note: Ubuntu 14.04 has custom script: 'sudo apt-get install libglfw3-dev' is not working, and cmake 3.x is not installed.
-#     # Note: comment in if-statement is now allowed.
-#     -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-#             if [ "$version" == "14.04" ]; then
-#                 sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
-#             else
-#                 docker pull ${distribution}:${version};
-#                 docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
-#                 docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo cmake';
-#                 docker exec $(docker ps -aq) /bin/bash -c './travis_ci/util/scripts/install-deps-ubuntu.sh';
-#             fi;
-#         fi
-#
-#     # homebrew and cmake 3.x is already installed in MacOS images
-#     # 'brew upgrade python' installs Python 3.6
-#     -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-#             ./util/scripts/install-deps-osx.sh;
-#         fi
+before_install:
+
+    # Ubuntu systems uses docker as travis-ci supports ubuntu 14.04 by default.
+    # Step 1) pull and run docker on the background
+    # Step 2) installing dependencies. install sudo as it is not installed in docker.
+    # Note: Ubuntu 14.04 has custom script: 'sudo apt-get install libglfw3-dev' is not working, and cmake 3.x is not installed.
+    # Note: comment in if-statement is now allowed.
+    -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+            if [ "$version" == "14.04" ]; then
+                sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+            else
+                docker pull ${distribution}:${version};
+                docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
+                docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo cmake';
+                docker exec $(docker ps -aq) /bin/bash -c './travis_ci/util/scripts/install-deps-ubuntu.sh';
+            fi;
+        fi
+
+    # homebrew and cmake 3.x is already installed in MacOS images
+    # 'brew upgrade python' installs Python 3.6
+    -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+            ./util/scripts/install-deps-osx.sh;
+        fi
 
 script:
     pwd
