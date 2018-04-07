@@ -71,7 +71,7 @@ script:
             docker exec $(docker ps -aq) /bin/bash -c 'cmake --version && python3 -V && pwd';
         fi
     -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-            cmake --version && python -V && pwd;
+            cmake --version && python3 -V && pwd;
         fi
     # - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
     # - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
