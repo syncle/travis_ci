@@ -3,8 +3,6 @@ matrix:
     notifications:
         email: false # turn off email notifications for build failure
 
-    sudo: required
-
     language:
       - python
       - cpp
@@ -22,6 +20,7 @@ matrix:
           env:
             - distribution: ubuntu
             - version: 14.04
+          sudo: true
           addons:
             apt:
               sources:
