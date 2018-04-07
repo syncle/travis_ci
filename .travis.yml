@@ -72,7 +72,7 @@ script:
     -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
             if [ "$version" == "16.04" ]; then
                 docker exec $(docker ps -aq) /bin/bash -c 'cmake --version';
-            fi
+            fi;
         else
             cmake --version;
         fi
