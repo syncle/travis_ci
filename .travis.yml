@@ -3,16 +3,19 @@ notifications:
 
 sudo: required
 
-env:
-    - distribution: ubuntu
-      version: 16.04
-      services:
-          - docker
+language:
+  - python
+  - cpp
 
-    - distribution: ubuntu
+include:
+
+    - os: linux
+      distribution: ubuntu
+      version: 16.04
+
+    - os: linux
+      distribution: ubuntu
       version: 14.04
-      services:
-          - docker
 
     # Default environment of MacOS El Capitan
     # compiled using clang shipped with xcode8
@@ -24,10 +27,8 @@ env:
     - os: osx
       osx_image: xcode8.3
 
-language: c++
-
-compiler:
-    - gcc
+services:
+    - docker
 
 before_install:
 
