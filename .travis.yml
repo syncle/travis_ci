@@ -39,7 +39,7 @@ before_install:
     # installing dependencies. install sudo as it is not installed by default.
     # Note: Ubuntu 14.04 and this environment does not recognize sudo apt-get install libglfw3-dev
     # Comment in if-statement is now allowed.
-    -   if [ "$distribution" == "ubuntu" ]; then
+    -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
             docker pull ${distribution}:${version};
             docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
             docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo';
@@ -53,7 +53,7 @@ before_install:
 
     # brew is already installed
     # scripts/install-deps-osx.sh works well
-    -   if [ "$os" == "osx" ]; then
+    -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
             brew install python;
             ./scripts/install-deps-osx.sh;
         fi
