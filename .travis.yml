@@ -51,7 +51,7 @@ matrix:
 before_install:
   # for reference, display cmake and python version
   - pyenv versions
-  - pyenv global system 3.6;
+  - pyenv global 3.6;
   - python -m pip install --user --upgrade pip wheel;
   - python -V
   - python3 -V
