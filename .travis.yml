@@ -51,15 +51,13 @@ before_install:
     # Step 2) installing dependencies. install sudo as it is not installed in docker.
     # Note: Ubuntu 14.04 has custom script: 'sudo apt-get install libglfw3-dev' is not working, and cmake 3.x is not installed.
     # Note: comment in if-statement is now allowed.
-    -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-            if [ "$version" == "14.04" ]; then
-                sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
-            else
-                docker pull ${distribution}:${version};
-                docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
-                docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo cmake';
-                docker exec $(docker ps -aq) /bin/bash -c './travis_ci/util/scripts/install-deps-ubuntu.sh';
-            fi;
+    -   if [ "$TRAVIS_OS_NAME" == "linux" ] AND [ "$version" == "14.04" ]; then
+            sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+        else
+            docker pull ${distribution}:${version};
+            docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
+            docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo cmake';
+            docker exec $(docker ps -aq) /bin/bash -c './travis_ci/util/scripts/install-deps-ubuntu.sh';
         fi
 
     # homebrew and cmake 3.x is already installed in MacOS images
@@ -69,10 +67,8 @@ before_install:
         fi
 
 script:
-    -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-            if [ "$version" == "16.04" ]; then
-                docker exec $(docker ps -aq) /bin/bash -c 'cmake --version';
-            fi;
+    -   if [ "$TRAVIS_OS_NAME" == "linux" ] AND NOT [ "$version" == "14.04" ]; then
+            docker exec $(docker ps -aq) /bin/bash -c 'cmake --version';
         else
             cmake --version;
         fi
