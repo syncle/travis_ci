@@ -21,7 +21,6 @@ matrix:
             - g++-4.8
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
-            - python3
 
     # Similar environment of Ubuntu 16.04 (gcc 5.4)
     # travis ci only supports Ubuntu 14.04 (trusty) gcc-5 and 6
@@ -38,7 +37,6 @@ matrix:
             - g++-6
             - cmake-data # to use cmake 3.0 or more recent
             - cmake
-            - python3
 
     # Default environment of MacOS El Capitan
     # compiled using clang shipped with xcode8
@@ -53,7 +51,7 @@ matrix:
 before_install:
   # for reference, display cmake and python version
   - pyenv versions
-  - pyenv global system 3.4;
+  - pyenv global system 3.6;
   - python3 -m pip install --user --upgrade pip wheel;
   - python -V
   - python3 -V
