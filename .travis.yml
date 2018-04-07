@@ -62,7 +62,7 @@ before_install:
 
 script:
     -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-            docker exec $(docker ps -aq) /bin/bash -c 'cmake --version && python3 -V && pwd';
+            docker exec $(docker ps -aq) /bin/bash -c 'cmake --version && python -V && pwd';
         fi
     -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
             cmake --version && python -V && pwd;
