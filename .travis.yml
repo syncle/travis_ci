@@ -20,18 +20,20 @@ compiler:
 before_install:
     # pull and running docker on the background
     # installing dependencies. install sudo as it is not installed by default.
+    # note that commend in if-statement is now allowed.
     -   if [ "${distribution}" == "ubuntu" ]; then
             docker pull ${distribution}:${version};
             docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
             docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo';
+            if [ "${version}" == "16.04" ]; then
+                docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
+            fi
+            if [ "${version}" == "14.04" ]; then
+                docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
+            fi
         fi
 
-    -   if [ "${version}" == "16.04" ]; then
-            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
-        fi
-    -   if [ "${version}" == "14.04" ]; then
-            docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;';
-        fi
+
 
 script:
     - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
