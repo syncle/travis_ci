@@ -12,8 +12,8 @@ matrix:
         # Ubuntu Xenial Xerus
         - os: linux
           env:
-            - distribution: ubuntu
-            - version: 16.04
+          - distribution: ubuntu
+          - version: 16.04
 
         # # Ubuntu Trusty Tahr
         # - os: linux
@@ -33,12 +33,13 @@ matrix:
         - os: osx
           osx_image: xcode8
           env:
-            - version: 10.12
+          - version: 10.12
 
         # MacOS Sierra
         - os: osx
           osx_image: xcode8.3
-            - version: 10.11
+          env:
+          - version: 10.11
 
     services:
         - docker
