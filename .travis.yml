@@ -53,7 +53,7 @@ before_install:
             fi;
         fi
 
-    # brew is already installed
+    # brew and cmake is already installed in MacOS images
     # scripts/install-deps-osx.sh works well
     -   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
             brew install python;
@@ -62,6 +62,7 @@ before_install:
 
 script:
     - cmake --version
+    - python -V
     - pwd
     # - docker exec $(docker ps -aq) /bin/bash -c 'pwd'
 #  - docker exec $(docker ps -aq) /bin/bash -c 'cd /code && make && make install'
