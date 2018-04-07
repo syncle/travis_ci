@@ -54,6 +54,11 @@ before_install:
     -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
             if [ "$version" == "14.04" ]; then
                 sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+            else
+                docker pull ${distribution}:${version};
+                docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
+                docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo cmake';
+                docker exec $(docker ps -aq) /bin/bash -c './travis_ci/util/scripts/install-deps-ubuntu.sh';
             fi;
         fi
 
@@ -64,10 +69,10 @@ before_install:
         fi
 
 script:
-    -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-            if [ "$version" == "16.04" ]; then
-                docker exec $(docker ps -aq) /bin/bash -c 'cmake --version';
-            fi;
-        else
-            cmake --version;
-        fi
+    # -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    #         if [ "$version" == "16.04" ]; then
+    #             docker exec $(docker ps -aq) /bin/bash -c 'cmake --version';
+    #         fi;
+    #     else
+    #         cmake --version;
+    #     fi
