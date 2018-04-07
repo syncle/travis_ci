@@ -15,19 +15,19 @@ matrix:
             - distribution: ubuntu
             - version: 16.04
 
-        # Ubuntu Trusty Tahr
-        - os: linux
-          env:
-            - distribution: ubuntu
-            - version: 14.04
-          sudo: true
-          addons:
-            apt:
-              sources:
-                - ubuntu-toolchain-r-test
-              packages:
-                - cmake-data # to use cmake 3.0 or more recent
-                - cmake
+        # # Ubuntu Trusty Tahr
+        # - os: linux
+        #   env:
+        #     - distribution: ubuntu
+        #     - version: 14.04
+        #   sudo: true
+        #   addons:
+        #     apt:
+        #       sources:
+        #         - ubuntu-toolchain-r-test
+        #       packages:
+        #         - cmake-data # to use cmake 3.0 or more recent
+        #         - cmake
 
         # MacOS El Capitan
         - os: osx
