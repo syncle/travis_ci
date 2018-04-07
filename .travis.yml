@@ -18,14 +18,14 @@ compiler:
     - gcc
 
 before_install:
+    # pull and running docker on the background
+    # installing dependencies. install sudo as it is not installed by default.
     -   if [ "${distribution}" == "ubuntu" ]; then
-            # pull and running docker on the background
             docker pull ${distribution}:${version};
             docker run -d -v $(pwd):/travis_ci ${distribution}:${version} /bin/bash -c 'while true; do sleep 1; done';
-            # sudo is not installed by default
             docker exec $(docker ps -aq) /bin/bash -c 'apt-get update && apt-get -y install sudo';
         fi
-    # installing dependencies.
+
     -   if [ "${version}" == "16.04" ]; then
             docker exec $(docker ps -aq) /bin/bash -c 'cd /travis_ci && scripts/install-deps-ubuntu.sh';
         fi
