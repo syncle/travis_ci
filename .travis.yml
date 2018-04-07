@@ -58,7 +58,7 @@ matrix:
 
 before_install:
   # for reference, display cmake and python version
-  - python -V
+  - python3 -V
   - cmake --version
 
   # ISSUE: we may want to use '/scripts/install-deps-ubuntu.sh' in the future.
@@ -67,6 +67,8 @@ before_install:
   # custom build GLFW3
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+      python3 -m pip install --user --upgrade pip wheel;
+      pyenv global system 3.6;
       ./util/scripts/make-documentation.sh;
     fi
   # scripts/install-deps-osx.sh works well
