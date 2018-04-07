@@ -54,6 +54,7 @@ before_install:
     -   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
             if [ "$version" == "14.04" ]; then
                 sudo apt-get install -y xorg-dev libglu1-mesa-dev libgl1-mesa-glx libglew-dev libjsoncpp-dev libeigen3-dev;
+            fi;
         fi
 
     # homebrew and cmake 3.x is already installed in MacOS images
