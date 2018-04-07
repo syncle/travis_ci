@@ -57,6 +57,10 @@ matrix:
         - "3.6"
 
 before_install:
+  # for reference, display cmake and python version
+  - python -V
+  - cmake --version
+
   # ISSUE: we may want to use '/scripts/install-deps-ubuntu.sh' in the future.
   # At this moment, travis-ci supports up to ubuntu 14.04 and this environment
   # does not recognize sudo apt-get install libglfw3-dev
@@ -70,9 +74,6 @@ before_install:
       brew install python;
       ./util/scripts/install-deps-osx.sh;
     fi
-  # for reference, display cmake and python version
-  - python -V
-  - cmake --version
 
 script:
   - pwd
