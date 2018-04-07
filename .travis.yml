@@ -12,12 +12,14 @@ matrix:
     include:
 
         - os: linux
-          distribution: ubuntu
-          version: 16.04
+          env:
+          - distribution: ubuntu
+          - version: 16.04
 
         - os: linux
-          distribution: ubuntu
-          version: 14.04
+          env:
+          - distribution: ubuntu
+          - version: 14.04
 
         # Default environment of MacOS El Capitan
         # compiled using clang shipped with xcode8
